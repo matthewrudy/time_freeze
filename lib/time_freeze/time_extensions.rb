@@ -1,3 +1,5 @@
+require 'date'
+
 class Time
   
   # stolen from ActiveSupport...
@@ -30,5 +32,12 @@ class Time
   def to_datetime
     ::DateTime.civil(year, month, day, hour, min, sec, Rational(utc_offset, 86400))
   end unless method_defined?(:to_datetime)
+  
+  # Ruby 1.8-cvs and early 1.9 series define private Time#to_date
+  %w(to_time to_date to_datetime).each do |method|
+    if private_instance_methods.include?(method) || private_instance_methods.include?(method.to_sym)
+      public method
+    end
+  end
   
 end

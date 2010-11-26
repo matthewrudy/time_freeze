@@ -29,7 +29,11 @@ module TimeFreeze
   module FreezeTime
     
     def now
-      TimeFreeze.frozen_time.to_time || super()
+      if TimeFreeze.frozen_time
+        TimeFreeze.frozen_time.to_time
+      else
+        super()
+      end
     end
     
   end
@@ -37,7 +41,11 @@ module TimeFreeze
   module FreezeDate
     
     def today
-      TimeFreeze.frozen_date.to_date || super()
+      if TimeFreeze.frozen_time
+        TimeFreeze.frozen_time.to_date
+      else
+        super()
+      end
     end
     
   end
@@ -45,7 +53,11 @@ module TimeFreeze
   module FreezeDateTime
     
     def now
-      TimeFreeze.frozen_datetime.to_datetime || super()
+      if TimeFreeze.frozen_time
+        TimeFreeze.frozen_time.to_datetime
+      else
+        super()
+      end
     end
     
   end
@@ -53,21 +65,19 @@ module TimeFreeze
 end
 
 class Time
-  extend TimeFreeze::FreezeTime
+  class << self
+    include TimeFreeze::FreezeTime
+  end
 end
 
-if defined?(Date)
-  
-  class Date
-    extend TimeFreeze::FreezeDate
+class Date
+  class << self
+    include TimeFreeze::FreezeDate
   end
-  
 end
 
-if defined?(DateTime)
-  
-  class DateTime
-    extend TimeFreeze::FreezeDateTime
+class DateTime
+  class << self
+    include TimeFreeze::FreezeDateTime
   end
-  
 end
