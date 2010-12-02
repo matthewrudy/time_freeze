@@ -25,59 +25,38 @@ module TimeFreeze
   def self.unfreeze!
     self.frozen_time=nil
   end
-  
-  module FreezeTime
-    
-    def now
-      if TimeFreeze.frozen_time
-        TimeFreeze.frozen_time.to_time
-      else
-        super()
-      end
-    end
-    
-  end
-  
-  module FreezeDate
-    
-    def today
-      if TimeFreeze.frozen_time
-        TimeFreeze.frozen_time.to_date
-      else
-        super()
-      end
-    end
-    
-  end
-  
-  module FreezeDateTime
-    
-    def now
-      if TimeFreeze.frozen_time
-        TimeFreeze.frozen_time.to_datetime
-      else
-        super()
-      end
-    end
-    
-  end
-  
+
 end
 
-class Time
-  class << self
-    include TimeFreeze::FreezeTime
+class << Time
+  alias :now_unfrozen :now
+  def now
+    if TimeFreeze.frozen_time
+      TimeFreeze.frozen_time.to_time
+    else
+      self.now_unfrozen
+    end
   end
 end
 
-class Date
-  class << self
-    include TimeFreeze::FreezeDate
+class << Date
+  alias :today_unfrozen :today
+  def today
+    if TimeFreeze.frozen_time
+      TimeFreeze.frozen_time.to_date
+    else
+      self.today_unfrozen
+    end
   end
 end
 
-class DateTime
-  class << self
-    include TimeFreeze::FreezeDateTime
+class << DateTime
+  alias :now_unfrozen :now
+  def now
+    if TimeFreeze.frozen_time
+      TimeFreeze.frozen_time.to_datetime
+    else
+      self.now_unfrozen
+    end
   end
 end
