@@ -5,31 +5,31 @@ require 'date'
 class TimeFreezeTest < Test::Unit::TestCase
   
   def setup
-    @time_now = Time.now
+    @time_now     = Time.now
+    @datetime_now = DateTime.now
+    @date_today    = Date.today
+    
+    TimeFreeze.unfreeze!
   end
   
   def test_normal_function
-     time_before = Time.now
-     datetime_before = DateTime.now
-     date_before = Date.today
+     assert_unfrozen_time
      
      sleep 10
      
-     assert_in_delta 10, Time.now - time_before, 0.1
-     
-     second_of_day = 1.0 / 24 / 60 / 60 
-     assert_in_delta 10*second_of_day, DateTime.now - datetime_before, 0.1*second_of_day
-     assert_equal date_before, Date.today
+     assert_unfrozen_time(10)
    end
   
   def test_freeze!
-    freeze_to = Time.mktime(2001,12,30,13,45,59,999999)
-    TimeFreeze.freeze!(freeze_to) do
-      assert_equal freeze_to, TimeFreeze.frozen_time
-      assert_equal freeze_to, Time.now
-      assert_equal freeze_to.to_datetime, DateTime.now
-      assert_equal freeze_to.to_date, Date.today
+    time1 = Time.mktime(2001,12,30,13,45,59,999999)
+    
+    assert_unfrozen_time
+    
+    TimeFreeze.freeze!(time1) do
+      assert_frozen_time(time1)
     end
+    
+    assert_unfrozen_time
   end
   
   class ExampleRaisedException < Exception; end
@@ -84,13 +84,11 @@ class TimeFreezeTest < Test::Unit::TestCase
     assert_equal expected_time.to_date,     Date.today
   end
   
-  def assert_unfrozen_time
-    assert_in_delta 0, Time.now - @time_now, 0.5
+  def assert_unfrozen_time(offset=0)
+    assert_in_delta offset, Time.now - @time_now, 0.5
+    assert_in_delta offset*DateTime::SECONDS_IN_DAY, DateTime.now - @datetime_now, 0.5*DateTime::SECONDS_IN_DAY
     
-    second_of_day = 1.0 / 24 / 60 / 60 
-    assert_in_delta 0, DateTime.now - @time_now.to_datetime, 0.5*second_of_day
-    
-    assert_equal @time_now.to_date, Date.today
+    assert_equal @date_today, Date.today
   end
   
 end
