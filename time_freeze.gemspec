@@ -2,14 +2,16 @@
 
 Gem::Specification.new do |s|
   s.name = %q{time_freeze}
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Matthew Rudy Jacobs"]
-  s.date = %q{2010-12-02}
+  s.date = %q{2010-12-08}
   s.email = %q{MatthewRudyJacobs@gmail.com}
-  s.files = ["test/test_helper.rb", "test/time_freeze_test.rb", "lib/time_freeze/time_extensions.rb", "lib/time_freeze.rb"]
+  s.extra_rdoc_files = ["README"]
+  s.files = ["README", "test/test_helper.rb", "test/time_freeze_test.rb", "lib/time_freeze/time_extensions.rb", "lib/time_freeze.rb"]
   s.homepage = %q{http://yoursite.example.com}
+  s.rdoc_options = ["--main", "README"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{The simplest possible way to freeze time}

@@ -25,7 +25,7 @@ spec = Gem::Specification.new do |s|
   s.summary           = "The simplest possible way to freeze time"
   s.author            = "Matthew Rudy Jacobs"
   s.email             = "MatthewRudyJacobs@gmail.com"
-  s.homepage          = "http://yoursite.example.com"
+  s.homepage          = "https://github.com/matthewrudy/time_freeze"
 
   s.has_rdoc          = true
   # You should probably have a README of some kind. Change the filename
