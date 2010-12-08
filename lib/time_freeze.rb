@@ -37,6 +37,11 @@ class << Time
       self.now_unfrozen
     end
   end
+  
+  # a handy shortcut to TimeFreeze.freeze!
+  def freeze!(*args, &block)
+    TimeFreeze.freeze!(*args, &block)
+  end
 end
 
 class << Date

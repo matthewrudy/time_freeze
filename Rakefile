@@ -21,8 +21,8 @@ spec = Gem::Specification.new do |s|
 
   # Change these as appropriate
   s.name              = "time_freeze"
-  s.version           = "0.1.0"
-  s.summary           = "What this thing does"
+  s.version           = "0.1.1"
+  s.summary           = "The simplest possible way to freeze time"
   s.author            = "Matthew Rudy Jacobs"
   s.email             = "MatthewRudyJacobs@gmail.com"
   s.homepage          = "http://yoursite.example.com"
@@ -30,11 +30,11 @@ spec = Gem::Specification.new do |s|
   s.has_rdoc          = true
   # You should probably have a README of some kind. Change the filename
   # as appropriate
-  # s.extra_rdoc_files  = %w(README)
-  # s.rdoc_options      = %w(--main README)
+  s.extra_rdoc_files  = %w(README)
+  s.rdoc_options      = %w(--main README)
 
   # Add any extra files to include in the gem (like your README)
-  s.files             = %w() + Dir.glob("{test,lib}/**/*")
+  s.files             = %w(README) + Dir.glob("{test,lib}/**/*")
   s.require_paths     = ["lib"]
 
   # If you want to depend on other gems, add them here, along with any

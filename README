@@ -1,0 +1,22 @@
+TimeFreeze
+==========
+
+Super simple library for freezing time consistently and without any dependencies
+
+  TimeFreeze.freeze!(Time.mktime(2001,12,30,13,45)) do
+    Time.now     # => "30th December 2001, 13:45"
+    Date.today   # => "30th December 2001"
+    DateTime.now # => "30th December 2001, 13:45"
+  end
+  
+Or for convenience you can use Time.freeze! rather than TimeFreeze.freeze!
+
+  Time.freeze!(Time.mktime(2001,12,30,13,45)) do
+    Time.now     # => "30th December 2001, 13:45"
+    Date.today   # => "30th December 2001"
+    DateTime.now # => "30th December 2001, 13:45"
+  end
+  
+The code is simple and clean,
+and is error tolerant,
+no fears that the time will not be reset afterwards.

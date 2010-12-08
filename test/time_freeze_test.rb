@@ -12,6 +12,18 @@ class TimeFreezeTest < Test::Unit::TestCase
     TimeFreeze.unfreeze!
   end
   
+  def test_time_dot_freeze!
+    time1 = Time.mktime(2001,12,30,13,45,59,999999)
+    
+    assert_unfrozen_time
+    
+    Time.freeze!(time1) do
+      assert_frozen_time(time1)
+    end
+    
+    assert_unfrozen_time
+  end
+  
   def test_normal_function
      assert_unfrozen_time
      
